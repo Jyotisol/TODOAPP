@@ -9,7 +9,7 @@ function App() {
   const [editTask, setEditTask] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/tasks')
+    axios.get('https://todoapp-backend-1-s12v.onrender.com/tasks')
       .then(response => setTasks(response.data))
       .catch(error => console.log(error));
   }, []);
@@ -17,7 +17,7 @@ function App() {
   const handleAddTask = () => {
     if (newTask.trim() === '') return;
 
-    axios.post('http://localhost:3000/tasks', { task: newTask })
+    axios.post('https://todoapp-backend-1-s12v.onrender.com/tasks', { task: newTask })
       .then(response => {
         setTasks([...tasks, response.data]);
         setNewTask('');
@@ -26,7 +26,7 @@ function App() {
   };
 
   const handleDeleteTask = (id) => {
-    axios.delete(`http://localhost:3000/tasks/${id}`)
+    axios.delete(`https://todoapp-backend-1-s12v.onrender.com/tasks/${id}`)
       .then(() => {
         setTasks(tasks.filter(task => task._id !== id));
       })
@@ -40,7 +40,7 @@ function App() {
   const handleUpdateTask = () => {
     if (!editTask || editTask.task.trim() === '') return;
 
-    axios.put(`http://localhost:3000/tasks/${editTask._id}`, { task: editTask.task })
+    axios.put(`https://todoapp-backend-1-s12v.onrender.com/tasks/${editTask._id}`, { task: editTask.task })
       .then(response => {
         setTasks(tasks.map(task => task._id === editTask._id ? response.data : task));
         setEditTask(null);
